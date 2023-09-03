@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  igi-react-cesium:
+    image:           igi-react-cesium-client-img
+    container_name: "igi-react-cesium-client-cont"
+    build:
+      context: ../igi-react-cesium
+      dockerfile: .Dockerfile
+    ports:
+      - "4008:4008"
+
+  meimad2-server:
+    image:           meimad2-server-img
+    container_name: "meimad2-server-cont"
+    build:
+      context: ../Meimad2Server
+      dockerfile: .Dockerfile
+    ports:
+      - "9004:9004"

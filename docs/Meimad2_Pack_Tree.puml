@@ -1,0 +1,48 @@
+@startuml
+
+    salt
+    {
+      {T
+         + <color: red>(on dev / build machine)
+         + c:\dev
+         ++ <color: blue>Meimad
+         ++ <color: blue>MeimadTerrainServer
+         ++ <color: blue>Meimad ...
+         ++ <color: blue>igi-node-and-docker-test
+         +++ <color: green>docker-compose.yml
+         ' +++ <color: green>.env.ubuntu-local-dev (windows host - local machine)
+         +++ <color: green>.env (windows host - host.docker.internal - for running on local machine)
+         +++ <color: green>.env.ubuntu-simplex-dev (windows host = dev.simplex-smart3d.com)
+         +++ <color: green>.env.ubuntu-simplex-stage (windows host - stage.simplex-smart3d.com)
+         +++ <color: green>.env.ubuntu-simplex-prod (windows host - production)
+
+         +++ <color: blue>python
+         ++++ for_prod
+         +++++ docker-compose.yml
+         ++++ <color: green>MeimadPack.py
+         ++++ <color: green>other-python-utils.py
+
+         -----------------------------------------------------------------------------------------
+         + <color:red>(inside the pack)
+         +      <color: blue>meimad-docker-compose-pack                   | <color:blue>Top level comment
+         ++     <color: blue>python_code                                 | <color:blue>The code
+         +++    <color: green>MeimadUnpackProd.py
+         +++    <color: green>other-python-utils.py
+         +++    <color: blue>docker-compose
+
+         ++++    <color: green>docker-compose.yml
+         ++++   <color:green>.env
+         +++    <color: blue>images                               | <color:blue>The images
+         ++++   <color:green>meimad-docker-images.tar
+         -----------------------------------------------------------------------------------------
+         <color: brown>note:
+         <color: brown>     For running on ubuntu with local machine as the windows host
+         <color: brown>     (hosts the Windows file server, mongo, postgres and the files)
+         <color: brown>     use profile: ubuntu-local-dev
+'         <color: brown>usage:
+'         <color: brown>- cd meimad-docker-compose-pack/python_code
+'         <color: brown>- python MeimadUnpack.py
+
+      }
+    }
+@enduml
