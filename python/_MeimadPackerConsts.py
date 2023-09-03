@@ -11,3 +11,5 @@ DEV_SERVER_INTERNAL_IP = '172.16.0.5'
 
 PROFILE_NAME__UBUNTU_LOCAL_DEV = "ubuntu-local-dev"
 PROFILE_NAME__UBUNTU_SIMPLEX_DEV = "ubuntu-simplex-dev"
+
+PROFILE_NAME__AWS = "aws"

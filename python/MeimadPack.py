@@ -76,7 +76,8 @@ if __name__ == '__main__':
     profile = MeimadPackArgsParser().parse_command_line_args()
     # profile = PROFILE_NAME__UBUNTU_LOCAL_DEV
     # profile = None
-    profile = PROFILE_NAME__UBUNTU_SIMPLEX_DEV
+    # profile = PROFILE_NAME__UBUNTU_SIMPLEX_DEV
+    profile = PROFILE_NAME__AWS
     print(f'using profile {profile}')
 
     dest_dir_parent = "d:/temp/1"
@@ -93,11 +94,11 @@ if __name__ == '__main__':
     dest_docker_compose_file_name = meimad_docker_params.dest_docker_compose_file_name
 
     all_image_names = DockerComposeParser().extract_image_names(src_docker_compose_file_name)
-    # all_image_names = ['meimad-terrain-service-img']
+
 
     delete_old_images__and__delete_old_pack_dir()
 
-    to_use_cache = False  # for performance
+    to_use_cache = True  # for performance
     build_new_images(to_use_cache)
 
     pack_images_tar_file()
@@ -108,4 +109,4 @@ if __name__ == '__main__':
     destZipFullFileName = f'{dest_dir_full_name}.zip'
     do_zip(destZipFullFileName)
 
-    MeimadPackUbuntuUtils().copy_files_to_ubuntu(profile, pack_short_dir_name, destZipFullFileName)
+    MeimadPackUbuntuUtils().copy_files_to_aws(profile, pack_short_dir_name, destZipFullFileName)

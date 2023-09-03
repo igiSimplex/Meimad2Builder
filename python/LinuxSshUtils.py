@@ -3,7 +3,7 @@ import posixpath
 from stat import S_ISDIR
 
 import paramiko
-
+from scp import SCPClient
 
 from _MeimadPackerConsts import *
 
@@ -23,6 +23,12 @@ class LinuxSshUtils:
         UBUNTU_DEV_USER = 'root'
         PUBLIC_KEY_FILENAME = "C:/Users/user/.ssh/id_rsa.pub"
         return self.connectAsSshClient(UBUNTU_DEV_EXTERNAL_IP, UBUNTU_DEV_USER, PUBLIC_KEY_FILENAME)
+
+    def connectToAwsAsSshClient(self):
+        USER_NAME='ec2-user'
+        PUBLIC_KEY_FILE_NAME="c:/temp/igi-meimad2-test.pem"
+        IP = 'ec2-51-16-16-250.il-central-1.compute.amazonaws.com'
+        return self.connectAsSshClient(IP, USER_NAME, PUBLIC_KEY_FILE_NAME)
 
     def scpCopy(self, sftp, sourceFileName, destFileName):
         print(f"scp copying: src: {sourceFileName}, dest: {destFileName} ...")

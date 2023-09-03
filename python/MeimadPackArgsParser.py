@@ -4,7 +4,7 @@ from _MeimadPackerConsts import *
 
 class MeimadPackArgsParser:
     def parse_command_line_args(self):
-        possible_profiles = ['', PROFILE_NAME__UBUNTU_LOCAL_DEV, PROFILE_NAME__UBUNTU_SIMPLEX_DEV, 'ubuntu-simplex-stage', 'ubuntu-simplex-prod']
+        possible_profiles = ['', PROFILE_NAME__AWS, PROFILE_NAME__UBUNTU_LOCAL_DEV, PROFILE_NAME__UBUNTU_SIMPLEX_DEV, 'ubuntu-simplex-stage', 'ubuntu-simplex-prod']
         parser = argparse.ArgumentParser(description='Pack ')
         parser.add_argument('-profile', help='The profile', choices=possible_profiles)
 
