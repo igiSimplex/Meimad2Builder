@@ -26,8 +26,8 @@ class LinuxSshUtils:
 
     def connectToAwsAsSshClient(self):
         USER_NAME='ec2-user'
-        PUBLIC_KEY_FILE_NAME="c:/temp/igi-meimad2-test.pem"
-        IP = 'ec2-51-16-16-250.il-central-1.compute.amazonaws.com'
+        PUBLIC_KEY_FILE_NAME="C:/temp/_igi_aws_conn/us_east_1_key_pair.pem"
+        IP = '18.207.228.193'
         return self.connectAsSshClient(IP, USER_NAME, PUBLIC_KEY_FILE_NAME)
 
     def scpCopy(self, sftp, sourceFileName, destFileName):
@@ -148,21 +148,27 @@ class LinuxSshUtils:
         # print(output)
 
 
-        a = 3
+        # a = 3
 
 
 
 if __name__ == '__main__':
     linux_ssh_utils = LinuxSshUtils()
 
+    sshClient = linux_ssh_utils.connectToAwsAsSshClient()
+    print(sshClient)
+
+
     sourceFileName = "c:\\temp\\1.txt"
     destFileName = "/home/meimad/2.txt"
 
-    sshClient = linux_ssh_utils.connectToMeimadUbuntuAsSshClient()
+
+
+    # sshClient = linux_ssh_utils.connectToMeimadUbuntuAsSshClient()
     # client_ip = linux_ssh_utils.get_client_ip(sshClient)
     # client_ip2 = linux_ssh_utils.get_client_ip2(sshClient)
-    # client_ip3 = linux_ssh_utils.get_client_ip3(sshClient)
     client_ip3 = linux_ssh_utils.get_client_ip3(sshClient)
+    # client_ip3 = linux_ssh_utils.get_client_ip3(sshClient)
     print("Client IP address:", client_ip3)
 
 

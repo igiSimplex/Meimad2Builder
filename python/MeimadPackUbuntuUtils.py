@@ -12,7 +12,7 @@ class MeimadPackUbuntuUtils:
 
     def copy_files_to_aws(self, profile, pack_short_dir_name, destZipFullFileName):
         if not self.check_if_is_aws_needed(profile):
-            print(f"ubuntu is not needed (profile name = {profile})")
+            print(f"aws is not needed (profile name = {profile})")
             return
 
         print(f"aws is needed (profile name = {profile})")
@@ -44,7 +44,7 @@ class MeimadPackUbuntuUtils:
 
             utils.executeCmdOnRemoteServer(sshClient, f'cd {home_ec2_user_meimad_dir}; unzip ./{destZipShortFileName}')
             utils.executeCmdOnRemoteServer(sshClient,
-                                           f'cd {home_ec2_user_meimad_dir}; python3.10 ./python_code/MeimadUnpackProd.py')
+                                           f'cd {home_ec2_user_meimad_dir}; python3.9 ./python_code/MeimadUnpackProd.py')
         finally:
             sshClient.close()
             sftp.close()
