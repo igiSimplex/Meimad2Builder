@@ -13,3 +13,5 @@ PROFILE_NAME__UBUNTU_LOCAL_DEV = "ubuntu-local-dev"
 PROFILE_NAME__UBUNTU_SIMPLEX_DEV = "ubuntu-simplex-dev"
 
 PROFILE_NAME__AWS = "aws"
+
+AWS_EC2_PUBLIC_IP = "44.203.57.73"

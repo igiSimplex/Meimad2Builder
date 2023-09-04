@@ -19,50 +19,16 @@ USER_DATA = '''#!/bin/bash
     '''
 
 
-def create_instances_and_get_ip_address():
-    region_name = REGION_NAME_US_EAST_1
-    ami = US_EAST_1_AMI
-
-    client = boto3.resource(
-        'ec2',
-        region_name=region_name
-    )
-
-
-    instance_details = client.create_instances(
-        ImageId=US_EAST_1_AMI,
-        MinCount=1,
-        MaxCount=1,
-        InstanceType="t1.micro",
-        SecurityGroupIds=["launch-wizard-1"],
-        KeyName=US_EAST_1_KEY_PAIR,
-        UserData=USER_DATA
-    )
-
-
-
-    the_instance=instance_details[0]
-
-    print(f"created instance: {the_instance}")
-
-    print(f"waiting until running ...")
-    the_instance.wait_until_running()
-
-    the_instance.reload()
-
-    public_ip = the_instance.public_ip_address
-
-    print(f"created instance: {instance_details[0]}, public ip: {public_ip}")
-
-
-def test2():
-    ec2 = boto3.client('ec2')
-    response = ec2.describe_key_pairs()
-    print(response)
-
-# def create_instance_2():
-#     ec2_client = boto3.client("ec2", region_name=REGION_NAME_US_EAST_1)
-#     instances = ec2_client.create_instances(
+# def create_instances_and_get_ip_address():
+#     region_name = REGION_NAME_US_EAST_1
+#     ami = US_EAST_1_AMI
+#
+#     client = boto3.resource(
+#         'ec2',
+#         region_name=region_name
+#     )
+#
+#     instance_details = client.create_instances(
 #         ImageId=US_EAST_1_AMI,
 #         MinCount=1,
 #         MaxCount=1,
@@ -71,6 +37,28 @@ def test2():
 #         KeyName=US_EAST_1_KEY_PAIR,
 #         UserData=USER_DATA
 #     )
+#
+#
+#
+#     the_instance=instance_details[0]
+#
+#     print(f"created instance: {the_instance}")
+#
+#     print(f"waiting until running ...")
+#     the_instance.wait_until_running()
+#
+#     the_instance.reload()
+#
+#     public_ip = the_instance.public_ip_address
+#
+#     print(f"created instance: {instance_details[0]}, public ip: {public_ip}")
+#     return public_ip
+
+
+def test2():
+    ec2 = boto3.client('ec2')
+    response = ec2.describe_key_pairs()
+    print(response)
 
 
 def run_instance_working():
