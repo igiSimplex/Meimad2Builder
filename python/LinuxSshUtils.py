@@ -26,8 +26,8 @@ class LinuxSshUtils:
 
     def connectToAwsAsSshClient(self):
         USER_NAME='ec2-user'
-        PUBLIC_KEY_FILE_NAME="C:/temp/_igi_aws_conn/us_east_1_key_pair.pem"
-        IP = AWS_EC2_PUBLIC_IP
+        PUBLIC_KEY_FILE_NAME=TLV_KEY_PAIR_PATH
+        IP = TLV_AWS_EC2_PUBLIC_IP
         return self.connectAsSshClient(IP, USER_NAME, PUBLIC_KEY_FILE_NAME)
 
     def scpCopy(self, sftp, sourceFileName, destFileName):

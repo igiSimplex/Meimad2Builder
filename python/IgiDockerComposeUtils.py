@@ -9,17 +9,17 @@ class IgiDockerComposeUtils:
         self.igi_os_utils.execute_os_command(command)
 
     def docker_compose_down(self, docker_compose_file_name):
-        self.igi_os_utils.execute_os_command(f'docker compose -f {docker_compose_file_name} down')
+        self.igi_os_utils.execute_os_command(f'docker-compose -f {docker_compose_file_name} down')
 
     def docker_compose_build(self, docker_compose_file_name, to_use_cache):
         use_cache_string = ""
         if not to_use_cache:
             use_cache_string = "--no-cache"
 
-        self.igi_os_utils.execute_os_command(f'docker compose -f {docker_compose_file_name} build {use_cache_string}')
+        self.igi_os_utils.execute_os_command(f'docker-compose -f {docker_compose_file_name} build {use_cache_string}')
 
     def docker_compose_up(self, docker_compose_file_name):
-        self.igi_os_utils.execute_os_command(f'docker compose -f {docker_compose_file_name} up')
+        self.igi_os_utils.execute_os_command(f'docker-compose -f {docker_compose_file_name} up')
 
     def docker_compose_up_no_build(self, docker_compose_file_name):
         self.igi_os_utils.execute_os_command(f'docker compose -f {docker_compose_file_name} up --no-build')

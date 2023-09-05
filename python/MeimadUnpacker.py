@@ -17,9 +17,13 @@ class MeimadUnpacker:
         # rootDir = "."
         meimad_docker_params = MeimadDockerParams(rootDir)
         docker_compose_file_name = meimad_docker_params.dest_docker_compose_file_name
+
+        print(f'docker_compose_file_name = ${docker_compose_file_name}')
         images_tar_file_name = meimad_docker_params.dest_images_tar_file_name
 
         igi_docker_compose_utils = IgiDockerComposeUtils(IgiOsUtils())
+        print(f'unpacking docker images from {igi_docker_compose_utils}')
+
         igi_docker_compose_utils.unpack_docker_images(images_tar_file_name)
         igi_docker_compose_utils.docker_compose_down(meimad_docker_params.dest_docker_compose_file_name)
         igi_docker_compose_utils.docker_compose_up_no_build(meimad_docker_params.dest_docker_compose_file_name)

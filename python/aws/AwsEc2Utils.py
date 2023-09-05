@@ -9,7 +9,8 @@ USER_DATA = '''#!/bin/bash
     #   uid=1000(ec2-user) gid=1000(ec2-user) groups=1000(ec2-user),4(adm),10(wheel),190(systemd-journal),992(docker)        
         newgrp docker   
         sudo systemctl enable docker.service
-        sudo systemctl start docker.service        
+        sudo systemctl start docker.service   
+        sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m) -o /usr/bin/docker-compose && sudo chmod 755 /usr/bin/docker-compose && docker-compose --version     
     '''
 
 

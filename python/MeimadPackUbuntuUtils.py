@@ -43,8 +43,11 @@ class MeimadPackUbuntuUtils:
             utils.scpCopyWithProgress(sshClient, destZipFullFileName, f'{home_ec2_user_meimad_dir}/{destZipShortFileName}')
 
             utils.executeCmdOnRemoteServer(sshClient, f'cd {home_ec2_user_meimad_dir}; unzip ./{destZipShortFileName}')
+
+            unpack_prod_command = f'cd {home_ec2_user_meimad_dir}; pwd; python3.9 ./python_code/MeimadUnpackProd.py'
+            print(f'executing ${unpack_prod_command}')
             utils.executeCmdOnRemoteServer(sshClient,
-                                           f'cd {home_ec2_user_meimad_dir}; python3.9 ./python_code/MeimadUnpackProd.py')
+                                           unpack_prod_command)
         finally:
             sshClient.close()
             sftp.close()
