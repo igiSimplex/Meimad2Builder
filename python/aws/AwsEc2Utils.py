@@ -10,7 +10,8 @@ USER_DATA = '''#!/bin/bash
         newgrp docker   
         sudo systemctl enable docker.service
         sudo systemctl start docker.service   
-        sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m) -o /usr/bin/docker-compose && sudo chmod 755 /usr/bin/docker-compose && docker-compose --version     
+        sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s | tr '[:upper:]' '[:lower:]')-$(uname -m) -o /usr/bin/docker-compose && sudo chmod 755 /usr/bin/docker-compose && docker-compose --version
+        sudo yum install postgresql15     
     '''
 
 

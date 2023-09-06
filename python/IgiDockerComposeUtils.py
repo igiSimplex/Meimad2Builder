@@ -22,7 +22,7 @@ class IgiDockerComposeUtils:
         self.igi_os_utils.execute_os_command(f'docker-compose -f {docker_compose_file_name} up')
 
     def docker_compose_up_no_build(self, docker_compose_file_name):
-        self.igi_os_utils.execute_os_command(f'docker compose -f {docker_compose_file_name} up --no-build')
+        self.igi_os_utils.execute_os_command(f'docker-compose -f {docker_compose_file_name} up --no-build')
 
     def remove_docker_image(self, docker_image):
         self.igi_os_utils.execute_os_command(f'docker image rm -f {docker_image}')
