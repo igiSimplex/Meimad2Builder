@@ -8,6 +8,7 @@ services:
       dockerfile: .Dockerfile
     ports:
       - "4008:4008"
+      - "80:4008"
 
   meimad2-server:
     image:           meimad2-server-img
