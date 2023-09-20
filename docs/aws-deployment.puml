@@ -4,33 +4,40 @@ actor "User" as user
 
 control "cloudflare\n(https://443)" as cloudflare
 
-box aws ec2
+box aws ec2 #lightgreen
 control "nginx\n(http:80)" as nginx
-control "Next meimad\nReact Client" as nextMeimadReactClient
-control "Next meimad\nAPI Server" as nextMeimadApiServer
-control "Next meimad\nFile Proxy" as nextMeimadFileProxy
-control "Next meimad\nSecurity Service" as nextMeimadSecurityService
+control "Next meimad\nReact Client\n(http:4008)" as nextMeimadReactClient
+control "Next meimad\nAPI Server\n(http:3008)" as nextMeimadApiServer
+control "Next meimad\nFile Proxy\n(http:3008)" as nextMeimadFileProxy
+control "Next meimad\nSecurity Service\n(http:9004)" as nextMeimadSecurityService
 end box
 
-box databases
+box databases #lightyellow
 database "Postgresql" as postgresql
 database "Redis" as redis
 database "ElasticSearch" as elasticSearch
 end box
 
-box storage
+box storage #azure
 collections s3 as s3
 end box
 
+== Login ==
+user -> nginx: Login (userName, password)
+nginx -> nextMeimadSecurityService: Login (userName, password)
+nextMeimadSecurityService -> nginx: "moshe" JWT Token
+nginx -> user: "moshe" JWT token
+
 == Meimad Server API ==
-nginx -> nextMeimadApiServer: begins with '/api' ?
+user -> nginx: api request
+nginx -> nextMeimadApiServer: begins with '/api' ? (i.e., /api/getAllLayers)
 nextMeimadApiServer -> postgresql: manipulate data according to api
 
 
-== Get data from s3 (mytile.3dm) ==
+== Get data from s3 (/get3dTileFile/mytile.3dm) ==
 
 activate nginx
-nginx -> nextMeimadFileProxy:  is s3 file (secured) ? ==> get mytile.3dm file for "moshe"
+nginx -> nextMeimadFileProxy:  begins with /get3dTileFile ?\n -> get mytile.3dm file for "moshe"
 nextMeimadFileProxy -> nextMeimadSecurityService: is user "moshe" allowed to\naccess mytile.3dm file ?
 
 nextMeimadSecurityService -> postgresql: get "moshe" details()
