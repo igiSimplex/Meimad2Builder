@@ -1,9 +1,13 @@
 version: "3.9"
 services:
-#  meimad2-nginx:
-#    image: nginx:1.25.2-alpine
-#    ports:
-#    - "4020:80"
+  meimad2-nginx:
+    image: meimad2-nginx-img
+    build:
+      context: ../Meimad2Nginx
+      dockerfile: .DockerFile
+    ports:
+    - "4020:80"
+    - "80:80"
 
   igi-react-cesium:
     image:           igi-react-cesium-client-img
@@ -13,7 +17,9 @@ services:
       dockerfile: .Dockerfile
     ports:
       - "4008:4008"
-      - "80:4008"
+#      - "80:4008"
+#    extra_hosts:
+#      - "host.docker.internal:host-gateway"
 
   meimad2-server:
     image:           meimad2-server-img

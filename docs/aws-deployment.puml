@@ -1,0 +1,47 @@
+@startuml
+
+actor "User" as user
+
+control "cloudflare\n(https://443)" as cloudflare
+
+box aws ec2
+control "nginx\n(http:80)" as nginx
+control "Next meimad\nReact Client" as nextMeimadReactClient
+control "Next meimad\nAPI Server" as nextMeimadApiServer
+control "Next meimad\nFile Proxy" as nextMeimadFileProxy
+control "Next meimad\nSecurity Service" as nextMeimadSecurityService
+end box
+
+box databases
+database "Postgresql" as postgresql
+database "Redis" as redis
+database "ElasticSearch" as elasticSearch
+end box
+
+box storage
+collections s3 as s3
+end box
+
+== Meimad Server API ==
+nginx -> nextMeimadApiServer: begins with '/api' ?
+nextMeimadApiServer -> postgresql: manipulate data according to api
+
+
+== Get data from s3 (mytile.3dm) ==
+
+activate nginx
+nginx -> nextMeimadFileProxy:  is s3 file (secured) ? ==> get mytile.3dm file for "moshe"
+nextMeimadFileProxy -> nextMeimadSecurityService: is user "moshe" allowed to\naccess mytile.3dm file ?
+
+nextMeimadSecurityService -> postgresql: get "moshe" details()
+nextMeimadSecurityService -> redis: is "moshe" allowed to access mytile.3dm ?
+nextMeimadSecurityService -> elasticSearch: is "moshe" allowed to\naccess mytile.3dm ?
+nextMeimadSecurityService -> s3: (if "moshe" is authorized)\nget mytile.3dm
+deactivate nginx
+
+user -> s3: get mytile.3dm file (non secured)
+
+== default - get react client site file ==
+nginx -> nextMeimadReactClient: (default)\nget react client site file
+
+@enduml
